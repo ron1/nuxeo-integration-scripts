@@ -60,10 +60,10 @@ pushd ${NUXEO_BUILD_DIR}
 git clone ${NUXEO_URL}
 pushd nuxeo
 ./clone.py ${RELEASE_TAG} || exit 1
-mvn install -DskipTests -Paddons,distrib
+mvn install source:jar source:test-jar -DskipTests -Paddons,distrib
 mvn dependency:sources -Paddons,distrib
 pushd nuxeo-distribution
-mvn install -DskipTests -pl :nuxeo-distribution-tomcat -Pnuxeo-cap,sdk
+mvn install source:jar source:test-jar -DskipTests -pl :nuxeo-distribution-tomcat -Pnuxeo-cap,sdk
 mvn dependency:sources -pl :nuxeo-distribution-tomcat -Pnuxeo-cap,sdk
 popd
 build_marketplace_packages
